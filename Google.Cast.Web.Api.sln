@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Google.Cast.Web.Api", "Google.Cast.Web.Api\Google.Cast.Web.Api.csproj", "{BC45F7DF-BBC9-4929-BB90-D79C95909926}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Cast.Desktop.Installer", "Google.Cast.Desktop.Installer\Google.Cast.Desktop.Installer.csproj", "{F8F608FB-E1FC-4C02-9B2E-32479CD5B703}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Cast.ClassLibrary.Service", "Google.Cast.ClassLibrary.Service\Google.Cast.ClassLibrary.Service.csproj", "{F0A24644-7966-4E17-B552-998DE3213D98}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BC45F7DF-BBC9-4929-BB90-D79C95909926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC45F7DF-BBC9-4929-BB90-D79C95909926}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC45F7DF-BBC9-4929-BB90-D79C95909926}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC45F7DF-BBC9-4929-BB90-D79C95909926}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8F608FB-E1FC-4C02-9B2E-32479CD5B703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8F608FB-E1FC-4C02-9B2E-32479CD5B703}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8F608FB-E1FC-4C02-9B2E-32479CD5B703}.Release|Any CPU.ActiveCfg = Release|Any CPU
