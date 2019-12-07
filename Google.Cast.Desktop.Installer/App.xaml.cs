@@ -15,6 +15,8 @@ namespace Google.Cast.Desktop.Installer
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            ShutdownMode = ShutdownMode.OnLastWindowClose;
+
             base.OnStartup(e);
             ConfigureContainer();
             ComposeObjects();

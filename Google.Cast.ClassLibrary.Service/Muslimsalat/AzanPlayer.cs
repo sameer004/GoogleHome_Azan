@@ -83,7 +83,7 @@ namespace Google.Cast.ClassLibrary.Service.Muslimsalat
                     new MediaInformation() { ContentId = media });
 
                 sender.Disconnect();
-
+                
                 return mediaStatus;
             }
             catch (Exception  )
