@@ -46,7 +46,7 @@ namespace Google.Cast.Desktop.Installer
 
         public static void UpdateStatus(string status)
         {
-
+            MessageBox.Show(status);
         }
     }
 }
