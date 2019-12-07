@@ -29,7 +29,7 @@ namespace Google.Cast.Desktop.Installer
         private void ComposeObjects()
         {
             Current.MainWindow = this.container.Get<MainWindow>();
-            Current.MainWindow.Title = "NYLA Google Kitchen Compiled Version";
+            Current.MainWindow.Title = "Adhan Player";
         }
     }
 }
