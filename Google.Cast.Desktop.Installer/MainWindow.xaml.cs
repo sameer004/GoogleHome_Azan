@@ -1,3 +1,4 @@
+using Google.Cast.ClassLibrary.Service.Muslimsalat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,9 @@ namespace Google.Cast.Desktop.Installer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            var a = new PrayerSetup<Azan>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", "newyork", DateTime.Now.ToString("dd-MM-yyyy"))
+                , "0 1 0 1/1 * ? *"
+                , "Office Ustairs speaker");
         }
 
         private void cmb_SelectedChanged(object sender, SelectionChangedEventArgs e)
