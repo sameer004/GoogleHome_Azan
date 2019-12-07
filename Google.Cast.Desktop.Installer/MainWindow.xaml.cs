@@ -1,6 +1,7 @@
 using Google.Cast.ClassLibrary.Service.Muslimsalat;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace Google.Cast.Desktop.Installer
             InitializeComponent();
         }
         private string playerSelect { get; set; }
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var a = new PrayerSetup<Azan>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", "newyork", DateTime.Now.ToString("dd-MM-yyyy"))

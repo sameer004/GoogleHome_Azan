@@ -47,10 +47,7 @@ namespace Google.Cast.ClassLibrary.Service.Muslimsalat
         private static void SchedulePrayers(PrayerResponse result, Scheduler a, string player)
         {
 
-            DateTime testPrayer = SetPrayerTime("2019-12-06", System.Convert.ToString( System.DateTime.Now.TimeOfDay), "testPrayer", a, player);
-
-            DateTime testPrayer2 = SetPrayerTime("2019-12-06", System.Convert.ToString(System.DateTime.Now.AddMinutes(1).TimeOfDay), "testPrayer_1", a, player);
-
+            DateTime demo = SetPrayerTime(DateTime.Now.ToString("yyyy-MM-dd"), System.Convert.ToString( System.DateTime.Now.TimeOfDay), "demo", a, player);
 
             DateTime fjr = SetPrayerTime(result.items[0].date_for, result.items[0].fajr, "fajar", a, player);
             DateTime duhur = SetPrayerTime(result.items[0].date_for, result.items[0].dhuhr, "duhur", a, player);

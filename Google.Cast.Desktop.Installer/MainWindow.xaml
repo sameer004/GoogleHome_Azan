@@ -15,7 +15,6 @@
         <Label Content="Developed by Adil Khan." Grid.Column="1" HorizontalAlignment="Left" Margin="433,322,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmbCaster" Grid.Column="1" HorizontalAlignment="Left" Margin="114,129,0,0" VerticalAlignment="Top" Width="120"   SelectionChanged="cmb_SelectedChanged" Loaded="cmbCaster_Loaded"/>
         <Label Content="Cast to: " Grid.Column="1" HorizontalAlignment="Left" Margin="55,128,0,0" VerticalAlignment="Top"/>
-        <Label Name="lblStatus" Content="Status" Grid.Column="1" HorizontalAlignment="Left" Margin="58,253,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

@@ -22,9 +22,13 @@ namespace Google.Cast.Desktop.Installer
                 var mediaInfo = new ChromeCastMediaInfo();
                 mediaInfo.FriendlyName = playerName;
 
-                if (jobSays.ToLower().Equals("testPrayer_1"))
+                if (jobSays.ToLower().Equals("fajar"))
                 {
                     mediaInfo.MediaUrl = "http://remote.khanzone.com:8181/audio/Fajar.mp3";
+                }
+                else if (jobSays.ToLower().Equals("demo"))
+                {
+                    mediaInfo.MediaUrl = "http://remote.khanzone.com:8181/audio/demo.mp3";
                 }
                 else
                 {
@@ -32,7 +36,6 @@ namespace Google.Cast.Desktop.Installer
                 }
                 
                 var p = new AzanPlayer(mediaInfo).Play((s)=> { MainWindow.UpdateStatus(s); });
-
                
             }
         }
