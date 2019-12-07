@@ -1,0 +1,9 @@
+﻿<Application x:Class="Google.Cast.Desktop.Installer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Google.Cast.Desktop.Installer"
+             >
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
