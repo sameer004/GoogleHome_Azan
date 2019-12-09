@@ -1,4 +1,5 @@
 using Google.Cast.ClassLibrary.Service.Muslimsalat;
+using Google.Cast.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,13 +25,26 @@ namespace Google.Cast.Desktop.Installer
         public MainWindow()
         {
             InitializeComponent();
+            var a = new Dal();
+            a.GetPlayer();
         }
         private string playerSelect { get; set; }
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var a = new PrayerSetup<Azan>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", "newyork", DateTime.Now.ToString("dd-MM-yyyy"))
+            StartUp();
+        }
+        /// <summary>
+        /// 1 - Updated the SQL Lite with the Selection from DropDown
+        /// 2 - Scrapes the Prayes Times API to get Today Times
+        /// 3 - Delete All Existing Jobs
+        /// 4 - Schedule Job to Run Daily for Scraping
+        /// 5 - Schedule are Prayers for Today
+        /// </summary>
+        private void StartUp()
+        {
+            var a = new PrayerSetup<Azan, SetAzanSchedule>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", "newyork", DateTime.Now.ToString("dd-MM-yyyy"))
                 , "0 1 0 1/1 * ? *"
                 , playerSelect);
         }

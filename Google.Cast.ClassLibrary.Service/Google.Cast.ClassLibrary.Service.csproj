@@ -115,5 +115,11 @@
     <Content Include="Dependencies\protobuf-net.dll" />
     <Content Include="Dependencies\Zeroconf.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Google.Cast.Data\Google.Cast.Data.csproj">
+      <Project>{e41e8154-c7b2-49f6-81cb-fa9118b6efa0}</Project>
+      <Name>Google.Cast.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

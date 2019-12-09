@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Google.Cast.Desktop.Installer"
         mc:Ignorable="d"
-        Title="Google Cast App" Height="456.084" Width="836.502" Closed="MainWindow_Closed" Loaded="MainWindow_Loaded" >
-    <Grid  Margin="0,0,56,20">
+        Title="Google Cast App" Height="462.146" Width="853.475" Closed="MainWindow_Closed" Loaded="MainWindow_Loaded" >
+    <Grid  Margin="33,0,197,89">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="91*"/>
             <ColumnDefinition Width="305*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnSchedule" x:FieldModifier="public" Content="Schedule Adhan (Minimize the Form)" Grid.Column="1" HorizontalAlignment="Left" Margin="58,166,0,0" VerticalAlignment="Top" Width="308" Height="82" Click="Button_Click"/>
-        <Label Content="Developed by Adil Khan." Grid.Column="1" HorizontalAlignment="Left" Margin="433,322,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnSchedule" x:FieldModifier="public" Content="Update Casting Device" Grid.Column="1" HorizontalAlignment="Left" Margin="250,123,0,0" VerticalAlignment="Top" Width="176" Height="36" Click="Button_Click"/>
+        <Label Content="Developed by Adil Khan." Grid.Column="1" HorizontalAlignment="Left" Margin="286,309,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.375,-0.787"/>
         <ComboBox x:Name="cmbCaster" Grid.Column="1" HorizontalAlignment="Left" Margin="114,129,0,0" VerticalAlignment="Top" Width="120"   SelectionChanged="cmb_SelectedChanged" Loaded="cmbCaster_Loaded"/>
         <Label Content="Cast to: " Grid.Column="1" HorizontalAlignment="Left" Margin="55,128,0,0" VerticalAlignment="Top"/>
 

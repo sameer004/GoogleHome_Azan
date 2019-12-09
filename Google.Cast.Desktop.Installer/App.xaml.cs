@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Google.Cast.ClassLibrary.Service.Models;
 using Google.Cast.ClassLibrary.Service.Muslimsalat;
+using Google.Cast.Data;
 using Ninject;
 
 namespace Google.Cast.Desktop.Installer
@@ -23,7 +24,8 @@ namespace Google.Cast.Desktop.Installer
         private void ConfigureContainer()
         {
             this.container = new StandardKernel();
-            container.Bind<IPrayerSetup<Azan>>().To<PrayerSetup<Azan>>().InTransientScope();
+            container.Bind<IPrayerSetup<Azan, SetAzanSchedule>>().To<PrayerSetup<Azan, SetAzanSchedule>>().InTransientScope();
+            container.Bind<IDal>().To<Dal>().InTransientScope();
         }
 
         private void ComposeObjects()

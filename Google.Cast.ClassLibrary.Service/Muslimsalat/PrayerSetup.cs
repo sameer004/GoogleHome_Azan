@@ -1,4 +1,5 @@
 ﻿using Google.Cast.ClassLibrary.Service.Quartz;
+using Google.Cast.Data;
 using Quartz;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,18 @@ using System.Threading.Tasks;
 
 namespace Google.Cast.ClassLibrary.Service.Muslimsalat
 {
-    public class PrayerSetup<T> : IPrayerSetup<T> where T:IJob
+    public class PrayerSetup<T, TOnce> : IPrayerSetup<T, TOnce> where T:IJob
+                                                                where TOnce:IJob
     {
+        private IDal _dal;
+        public PrayerSetup()
+        {
+            _dal = new Dal();
+        }
 
         public bool SetUp(string _url, string cron, string player)
         {
-
+            _dal.UpdatePlayer(player);
             // Get Prayer Timing
             PrayerResponse result = GetPrayerTimes(_url);
 
@@ -24,7 +31,7 @@ namespace Google.Cast.ClassLibrary.Service.Muslimsalat
             JobCleanUp(sched, cron);
 
             //Schedule all Prayers
-            SchedulePrayers(result, sched, player);
+            SchedulePrayers(result, sched, _dal.GetPlayer());
 
             return true;
         }
@@ -41,7 +48,7 @@ namespace Google.Cast.ClassLibrary.Service.Muslimsalat
             // Delete Exisiting jobs if ANY
             a.DeleteJobs();
             // Get Today azan Timing --- ONCE a day execute
-            a.CreateJobOnce<T>("DailyUpdate", System.DateTime.Now, cronSchedule);
+            a.CreateJobOnce<TOnce>("DailyUpdate", System.DateTime.Now, cronSchedule);
         }
 
         private static void SchedulePrayers(PrayerResponse result, Scheduler a, string player)
