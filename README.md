@@ -1,4 +1,4 @@
-#Adhan/Azan Player for Google home or Amazon alexa automatically.
+**Adhan/Azan Player for Google home or Amazon alexa automatically.**
 
 Adhan Player for Google Home or Amazon Alexa.
 
