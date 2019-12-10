@@ -20,7 +20,7 @@ namespace Google.Cast.ClassLibrary.Service.Muslimsalat
 
         public bool SetUp(string _url, string cron, string player)
         {
-            _dal.UpdatePlayer(player);
+   
             // Get Prayer Timing
             PrayerResponse result = GetPrayerTimes(_url);
 
@@ -54,7 +54,7 @@ namespace Google.Cast.ClassLibrary.Service.Muslimsalat
         private static void SchedulePrayers(PrayerResponse result, Scheduler a, string player)
         {
 
-            DateTime demo = SetPrayerTime(DateTime.Now.ToString("yyyy-MM-dd"), System.Convert.ToString( System.DateTime.Now.TimeOfDay), "demo", a, player);
+            //DateTime demo = SetPrayerTime(DateTime.Now.ToString("yyyy-MM-dd"), System.Convert.ToString( System.DateTime.Now.TimeOfDay), "demo", a, player);
 
             DateTime fjr = SetPrayerTime(result.items[0].date_for, result.items[0].fajr, "fajar", a, player);
             DateTime duhur = SetPrayerTime(result.items[0].date_for, result.items[0].dhuhr, "duhur", a, player);

@@ -15,6 +15,7 @@ namespace Google.Cast.Data
 
         public Dal()
         {
+            System.IO.Directory.SetCurrentDirectory(System.AppDomain.CurrentDomain.BaseDirectory);
             conn = CreateConnection();
         }
         private SQLiteConnection CreateConnection()
@@ -29,16 +30,20 @@ namespace Google.Cast.Data
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
             return conn;
         }
 
         public void CreateTable()
         {
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
 
             SQLiteCommand sqlite_cmd;
-            string Createsql = "CREATE TABLE Azan(Player VARCHAR(20), id INT)";
+            string Createsql = "CREATE TABLE IF NOT EXISTS Azan(Player VARCHAR(20), id INT)";
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = Createsql;
             sqlite_cmd.ExecuteNonQuery();
@@ -47,15 +52,25 @@ namespace Google.Cast.Data
 
         public void InsertData()
         {
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
             SQLiteCommand sqlite_cmd;
             sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = "INSERT INTO Azan (Player, id) VALUES('Ups ', 1); ";
+            sqlite_cmd.CommandText = "INSERT INTO Azan (Player, id) Select '', 1  WHERE NOT EXISTS(SELECT 1 FROM Azan WHERE id = 1);";
             sqlite_cmd.ExecuteNonQuery();
 
         }
 
         public void DeleteData()
         {
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
             SQLiteCommand sqlite_cmd;
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = "Delete From Azan ";
@@ -65,6 +80,11 @@ namespace Google.Cast.Data
 
         public void UpdatePlayer(string player)
         {
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
             SQLiteCommand sqlite_cmd;
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = "Update Azan set Player=:player where id=1 ";
@@ -73,8 +93,14 @@ namespace Google.Cast.Data
 
         }
 
+
         public void ReadData()
         {
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
             SQLiteDataReader sqlite_datareader;
             SQLiteCommand sqlite_cmd;
             sqlite_cmd = conn.CreateCommand();
@@ -92,21 +118,33 @@ namespace Google.Cast.Data
 
         public string GetPlayer()
         {
-            SQLiteDataReader sqlite_datareader;
-            SQLiteCommand sqlite_cmd;
-            string myreader = "";
-            sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = "SELECT * FROM Azan where id=1";
 
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
-            while (sqlite_datareader.Read())
+
+
+            try
             {
-                myreader = Convert.ToString(sqlite_datareader["player"]);
-                Console.WriteLine(myreader);
-            }
-            conn.Close();
+                SQLiteDataReader sqlite_datareader;
+                SQLiteCommand sqlite_cmd;
+                string myreader = "";
+                sqlite_cmd = conn.CreateCommand();
+                sqlite_cmd.CommandText = "SELECT * FROM Azan where id=1";
 
-            return myreader;
+                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                while (sqlite_datareader.Read())
+                {
+                    myreader = Convert.ToString(sqlite_datareader["player"]);
+                    Console.WriteLine(myreader);
+                }
+                conn.Close();
+
+                return myreader;
+            }
+            catch (Exception)
+            {
+
+                return "";
+            }
+
         }
 
 

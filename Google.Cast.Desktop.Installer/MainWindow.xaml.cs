@@ -1,19 +1,12 @@
+using Google.Cast.ClassLibrary.Service.Models;
 using Google.Cast.ClassLibrary.Service.Muslimsalat;
 using Google.Cast.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Google.Cast.Desktop.Installer
 {
@@ -22,18 +15,38 @@ namespace Google.Cast.Desktop.Installer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Dal _dal;
+        string _player;
         public MainWindow()
         {
+     
             InitializeComponent();
-            var a = new Dal();
-            a.GetPlayer();
+            _dal = new Dal(); 
+            _player = _dal.GetPlayer();
+
+            loadButtons();            
         }
-        private string playerSelect { get; set; }
+
+        private void loadButtons()
+        {
+            if (string.IsNullOrEmpty(_player))
+            {
+                btnService.IsEnabled = false;
+                btnSchedule.IsEnabled = false;
+                btnTest.IsEnabled = false;
+                return;
+            }
+            lblCurrentCasting.Content = "Current Player: " + _player;
+            btnService.IsEnabled = true;
+            btnSchedule.IsEnabled = true;
+            btnTest.IsEnabled = true;
+        }
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             StartUp();
+            loadButtons();
         }
         /// <summary>
         /// 1 - Updated the SQL Lite with the Selection from DropDown
@@ -44,15 +57,24 @@ namespace Google.Cast.Desktop.Installer
         /// </summary>
         private void StartUp()
         {
+            _dal.CreateTable();
+            _dal.InsertData();
+            _dal.UpdatePlayer(_player);
+
+            // serviceStart("Google.Cast.Adthan");
+
             var a = new PrayerSetup<Azan, SetAzanSchedule>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", "newyork", DateTime.Now.ToString("dd-MM-yyyy"))
                 , "0 1 0 1/1 * ? *"
-                , playerSelect);
+                , _player);
         }
+
+
+
 
         private void cmb_SelectedChanged(object sender, SelectionChangedEventArgs e)
         {
+            _player = cmbCaster.SelectedValue as string;
             btnSchedule.IsEnabled = true;
-            playerSelect = cmbCaster.SelectedValue as string;
         }
 
         private async void cmbCaster_Loaded(object sender, RoutedEventArgs e)
@@ -69,12 +91,75 @@ namespace Google.Cast.Desktop.Installer
 
         public static void UpdateStatus(string status)
         {
-            
+
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             btnSchedule.IsEnabled = false;
         }
+
+        private void BtnInstallSvc(object sender, RoutedEventArgs e)
+        {
+            InstallService();
+        }
+
+
+        private void InstallService()
+        {
+            try
+
+            {
+
+                ProcessStartInfo procInfo = new ProcessStartInfo();
+
+                procInfo.UseShellExecute = true;
+
+                procInfo.FileName = @"Install.bat";  //The file in that DIR.
+
+                procInfo.WorkingDirectory = @""; //The working DIR.
+
+                procInfo.Verb = "runas";
+
+                Process.Start(procInfo);  //Start that process.
+
+            }
+
+            catch (Exception ex)
+
+            {
+
+                MessageBox.Show(ex.Message.ToString());
+
+            }
+        }
+
+        private async void BtnTestService(object sender, RoutedEventArgs e)
+        {
+            var a = new AzanPlayer(new ChromeCastMediaInfo() {FriendlyName=_player,MediaUrl= "http://remote.khanzone.com:8181/audio/demo.mp3" });
+            await a.Play((s) => MessageBox.Show("Media Status: " + s + " ON " + _player));
+        }
+
+       
+
+        //private void serviceStart(string svcName)
+        //{
+        //    var svcExists = this.svcExists(svcName);
+        //    if (svcExists)
+        //    {
+        //        var service = new ServiceController("Google.Cast.Adthan");
+        //        if (service.Status == ServiceControllerStatus.Stopped)
+        //            service.Start();
+        //    }
+
+        //}
+        //private bool svcExists(string svcName)
+        //{
+        //    ServiceController ctl = ServiceController.GetServices().FirstOrDefault(s => s.ServiceName == svcName);
+        //    if (ctl == null)
+        //        return false;
+        //    else
+        //        return true;
+        //}
     }
 }
