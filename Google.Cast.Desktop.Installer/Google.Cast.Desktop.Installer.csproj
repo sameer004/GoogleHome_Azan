@@ -183,7 +183,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Oxygen-Icons.org-Oxygen-Apps-preferences-system-time.ico" />
+    <Resource Include="Oxygen-Icons.org-Oxygen-Apps-preferences-system-time.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

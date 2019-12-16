@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Google.Cast.Desktop.Installer"
         mc:Ignorable="d"
-        Title="Google Cast App" Height="290" Width="400" Closed="MainWindow_Closed" Loaded="MainWindow_Loaded" >
+        Title="Google Cast App" Height="350" Width="400" Closed="MainWindow_Closed" Loaded="MainWindow_Loaded" >
     <Window.Resources>
         
         <Style TargetType="Button" x:Key="btnBlue">
@@ -44,24 +44,33 @@
 
             <Grid Margin="6">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Play On: " />
                 <ComboBox x:Name="cmbCaster" Grid.Column="1"  SelectionChanged="cmb_SelectedChanged" Loaded="cmbCaster_Loaded"/>
             </Grid>
-
-
-            <Button x:Name="btnSchedule" x:FieldModifier="public" Content="Update Casting Device"  Width="176" Height="36" Click="Button_Click"/>
-
             <Label x:FieldModifier="public" Name="lblCurrentCasting" Content="Please Assign A Speaker" Margin="10,0,0,0"  Foreground="#FFB9AC26"  />
+            <Grid Margin="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="State: " />
+                <ComboBox x:Name="cmbStates" Grid.Column="1" Width="100" Loaded="cmbStates_Loaded" SelectionChanged="CmbStates_SelectionChanged"/>
+            </Grid>
+            <Label x:FieldModifier="public" Name="lblCurrentState" Content="Please Assign A State" Margin="10,0,0,0"  Foreground="#FFB9AC26"  />
+            
+            <Button x:Name="btnSchedule" x:FieldModifier="public" Content="Update Settings"  Width="176" Height="36" Click="Button_Click"/>
 
-            <Button x:Name="btnTest" x:FieldModifier="public" Content="Test Media"  Width="176" Height="36" Click="BtnTestService"/>
+        
+
+            <Button x:Name="btnTest" x:FieldModifier="public" Content="Test Media"  Width="176" Margin="10" Height="36" Click="BtnTestService"/>
 
             <Button x:Name="btnService" x:FieldModifier="public" Content="Install as Background Service"  Style="{StaticResource btnBlue}"  Width="176" Height="36" Click="BtnInstallSvc"/>
 
 
-            <Label Content="Developed by UnityWebGroup Inc."  />
+            <Label Content="Developed by S Khan"  />
             
             
         </StackPanel>

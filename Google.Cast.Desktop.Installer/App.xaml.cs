@@ -50,7 +50,7 @@ namespace Google.Cast.Desktop.Installer
         private void ComposeObjects()
         {
             Current.MainWindow = this.container.Get<MainWindow>();
-            Current.MainWindow.Title = "Adhan Player";
+            Current.MainWindow.Title = "Adhan Player For ChromeCast";
         }
     }
 }

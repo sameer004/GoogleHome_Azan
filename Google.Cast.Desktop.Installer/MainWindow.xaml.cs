@@ -2,6 +2,7 @@ using Google.Cast.ClassLibrary.Service.Models;
 using Google.Cast.ClassLibrary.Service.Muslimsalat;
 using Google.Cast.Data;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -16,13 +17,19 @@ namespace Google.Cast.Desktop.Installer
     public partial class MainWindow : Window
     {
         private Dal _dal;
+        private List<US_State> states;
         string _player;
+        string _state;
         public MainWindow()
         {
      
             InitializeComponent();
+
             _dal = new Dal(); 
             _player = _dal.GetPlayer();
+            _state = _dal.GetState();
+
+            states = new US_State().GetStates();
 
             loadButtons();            
         }
@@ -37,6 +44,7 @@ namespace Google.Cast.Desktop.Installer
                 return;
             }
             lblCurrentCasting.Content = "Current Player: " + _player;
+            lblCurrentState.Content = "Current State: " + _state;
             btnService.IsEnabled = true;
             btnSchedule.IsEnabled = true;
             btnTest.IsEnabled = true;
@@ -60,10 +68,11 @@ namespace Google.Cast.Desktop.Installer
             _dal.CreateTable();
             _dal.InsertData();
             _dal.UpdatePlayer(_player);
+            _dal.UpdateState(_state);
 
             // serviceStart("Google.Cast.Adthan");
-
-            var a = new PrayerSetup<Azan, SetAzanSchedule>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", "newyork", DateTime.Now.ToString("dd-MM-yyyy"))
+            //https://muslimsalat.com/{0}/daily/{1}/false.json
+            var a = new PrayerSetup<Azan, SetAzanSchedule>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", _state, DateTime.Now.ToString("dd-MM-yyyy"))
                 , "0 1 0 1/1 * ? *"
                 , _player);
         }
@@ -140,7 +149,23 @@ namespace Google.Cast.Desktop.Installer
             await a.Play((s) => MessageBox.Show("Media Status: " + s + " ON " + _player));
         }
 
-       
+        private void cmbStates_Loaded(object sender, RoutedEventArgs e)
+        {
+   
+
+            cmbStates.DisplayMemberPath = "Abbreviations";
+            cmbStates.SelectedValuePath = "Name";
+            cmbStates.ItemsSource = states;
+
+            cmbStates.SelectedIndex = 1;
+        }
+
+        private void CmbStates_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _state = (cmbStates.SelectedItem as US_State).Abbreviations;
+        }
+
+
 
         //private void serviceStart(string svcName)
         //{

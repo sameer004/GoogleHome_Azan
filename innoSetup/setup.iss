@@ -25,7 +25,7 @@ UsedUserAreasWarning=no
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 OutputBaseFilename=SetUp
-SetupIconFile=C:\Users\eliza\Downloads\Oxygen-Icons.org-Oxygen-Apps-preferences-system-time.ico
+SetupIconFile=C:\Users\Default\Documents\Docs\Programming\GoogleCast\Google.Cast.Desktop.Installer\Oxygen-Icons.org-Oxygen-Apps-preferences-system-time.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern

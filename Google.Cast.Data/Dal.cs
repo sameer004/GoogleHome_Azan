@@ -22,7 +22,7 @@ namespace Google.Cast.Data
         {
 
             // Create a new database connection:
-            conn = new SQLiteConnection("Data Source=database.db; Version = 3; New = True; Compress = True; ");
+            conn = new SQLiteConnection("Data Source=database1.db; Version = 3; New = True; Compress = True; ");
             // Open the connection:
             try
             {
@@ -43,7 +43,7 @@ namespace Google.Cast.Data
             }
 
             SQLiteCommand sqlite_cmd;
-            string Createsql = "CREATE TABLE IF NOT EXISTS Azan(Player VARCHAR(20), id INT)";
+            string Createsql = "CREATE TABLE IF NOT EXISTS Azan(Player VARCHAR(20),State VARCHAR(1000), id INT)";
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = Createsql;
             sqlite_cmd.ExecuteNonQuery();
@@ -59,7 +59,7 @@ namespace Google.Cast.Data
 
             SQLiteCommand sqlite_cmd;
             sqlite_cmd = conn.CreateCommand();
-            sqlite_cmd.CommandText = "INSERT INTO Azan (Player, id) Select '', 1  WHERE NOT EXISTS(SELECT 1 FROM Azan WHERE id = 1);";
+            sqlite_cmd.CommandText = "INSERT INTO Azan (Player,State, id) Select '','', 1  WHERE NOT EXISTS(SELECT 1 FROM Azan WHERE id = 1);";
             sqlite_cmd.ExecuteNonQuery();
 
         }
@@ -119,7 +119,10 @@ namespace Google.Cast.Data
         public string GetPlayer()
         {
 
-
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
 
             try
             {
@@ -147,6 +150,54 @@ namespace Google.Cast.Data
 
         }
 
+        public string GetState()
+        {
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
 
+            try
+            {
+                SQLiteDataReader sqlite_datareader;
+                SQLiteCommand sqlite_cmd;
+                string myreader = "";
+                sqlite_cmd = conn.CreateCommand();
+                sqlite_cmd.CommandText = "SELECT * FROM Azan where id=1";
+
+                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                while (sqlite_datareader.Read())
+                {
+                    myreader = Convert.ToString(sqlite_datareader["state"]);
+
+                }
+                conn.Close();
+
+                if (string.IsNullOrEmpty(myreader))
+                {
+                    return "New York";
+                }
+                return myreader;
+            }
+            catch (Exception ex)
+            {
+
+                return "";
+            }
+        }
+
+        public void UpdateState(string state)
+        {
+            if (conn.State == System.Data.ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SQLiteCommand sqlite_cmd;
+            sqlite_cmd = conn.CreateCommand();
+            sqlite_cmd.CommandText = "Update Azan set State=:state where id=1 ";
+            sqlite_cmd.Parameters.Add("state", DbType.String).Value = state;
+            sqlite_cmd.ExecuteNonQuery();
+        }
     }
 }

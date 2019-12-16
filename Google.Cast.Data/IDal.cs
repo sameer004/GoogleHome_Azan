@@ -8,5 +8,9 @@
         void InsertData();
         void ReadData();
         void UpdatePlayer(string player);
+
+        string GetState();
+        void UpdateState(string state);
+
     }
 }
