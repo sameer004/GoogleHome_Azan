@@ -2,4 +2,4 @@
 
 Adhan Player for Google Home or Amazon Alexa.
 
-Google.Cast.Desktop.Installer has the EXE to be installed on a PC. 
+Google.Cast.Desktop.Installer has the EXE to be installed on a PC..
