@@ -22,7 +22,7 @@ namespace Google.Cast.Data
         }
         public List<US_State> GetStates()
         {
-    
+            US_States.Add(new US_State("USA ", "----USA-----"));
             US_States.Add(new US_State("AL", "Alabama"));
             US_States.Add(new US_State("AK", "Alaska"));
             US_States.Add(new US_State("AZ", "Arizona"));
@@ -74,6 +74,10 @@ namespace Google.Cast.Data
             US_States.Add(new US_State("WV", "West Virginia"));
             US_States.Add(new US_State("WI", "Wisconsin"));
             US_States.Add(new US_State("WY", "Wyoming"));
+            US_States.Add(new US_State("Canada ", "----Canada-----"));
+            US_States.Add(new US_State("Toronto ", "Toronto"));
+            US_States.Add(new US_State("Mississauga ", "Mississauga"));
+            US_States.Add(new US_State("Vancouver ", "Vancouver"));
 
             return US_States;
         }

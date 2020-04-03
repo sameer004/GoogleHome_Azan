@@ -23,15 +23,17 @@ namespace Google.Cast.Desktop.Installer.Service
 
         protected override void OnStart(string[] args)
         {
+            System.Diagnostics.Debugger.Launch();
             StartUp();
         }
         protected override void OnStop()
         {
         }
 
-
+        // This Runs once when service starts
         private void StartUp()
         {
+            
             Thread.Sleep(2000);
             var d = new Dal();
             string _player = d.GetPlayer();

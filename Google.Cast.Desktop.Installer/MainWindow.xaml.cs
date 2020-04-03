@@ -72,7 +72,7 @@ namespace Google.Cast.Desktop.Installer
 
             // serviceStart("Google.Cast.Adthan");
             //https://muslimsalat.com/{0}/daily/{1}/false.json
-            var a = new PrayerSetup<Azan, SetAzanSchedule>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", _state, DateTime.Now.ToString("dd-MM-yyyy"))
+            var a = new PrayerSetup<Azan, SetAzanSchedule>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}.json", _state, DateTime.Now.ToString("dd-MM-yyyy"))
                 , "0 1 0 1/1 * ? *"
                 , _player);
         }

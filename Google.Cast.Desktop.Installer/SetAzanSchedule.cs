@@ -15,12 +15,12 @@ namespace Google.Cast.Desktop.Installer
         {
             StartUp();
         }
-
+        // This runs every midnight
         private static void StartUp()
         {
             IDal _dal = new Dal();
 
-            var a = new PrayerSetup<Azan, SetAzanSchedule>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}/false.json", "newyork", DateTime.Now.ToString("dd-MM-yyyy"))
+            var a = new PrayerSetup<Azan, SetAzanSchedule>().SetUp(string.Format("https://muslimsalat.com/{0}/daily/{1}.json", _dal.GetState(), DateTime.Now.ToString("dd-MM-yyyy"))
     , "0 1 0 1/1 * ? *"
     , _dal.GetPlayer());
         }
