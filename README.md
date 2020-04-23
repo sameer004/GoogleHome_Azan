@@ -2,4 +2,4 @@
 
 Adhan Player for Google Home or Google Home mini/Chromecast.
 
-Google.Cast.Desktop.Installer has the EXE to be installed on a PC..
+innoSetup/Output has the EXE to be installed on a PC.
